@@ -1,3 +1,4 @@
+import repositorio.clientes as clientes_repositorio
 
 def iniciar_menu_principal():
     while True: 
@@ -36,3 +37,11 @@ def iniciar_submenu_consulta_clientes():
                 break
             case other:
                 print("opção inválida")
+
+def mostrar_todos_clientes():
+
+    clientes = clientes_repositorio.get_todos_clientes()
+    for cliente in clientes:
+        print(f"NOME: {cliente.nome_completo}\nDATA NASCIMENTO: {cliente.data_nascimento}\nEMAIL: {cliente.email}\nDATA CRIACAO: {cliente.data_criacao}")
+
+   
