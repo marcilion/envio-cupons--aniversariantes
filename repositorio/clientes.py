@@ -3,7 +3,7 @@ import os
 #import dotenv
 from datetime import datetime
 
-dotenv.load_dotenv()
+#dotenv.load_dotenv()
 CAMINHO_ARQUIVO_DADOS = os.getenv("CAMINHO_DADOS_ARQUIVO")
 
 def get_todos_clientes() -> list:
@@ -25,7 +25,7 @@ def get_todos_clientes() -> list:
 
     return clientes
 
-def get_clientes_aniversariantes() -> list[Cliente]:
+def get_clientes_aniversariantes(mes:int, dia: int) -> list[Cliente]:
     clientes = get_todos_clientes()
     
     hoje = datetime.today()
@@ -41,7 +41,15 @@ def get_clientes_aniversariantes() -> list[Cliente]:
         if data_nascimento["dia"] == dia_atual and data_nascimento["mes"] == mes_atual:
             aniversariantes.append(cliente)
 
-    return aniversariantes        
+    return aniversariantes   
 
-     
-                      
+def get_clientes_por_mes_aniversario(mes: int) -> list[Cliente]:     
+    clientes = get_todos_clientes()    
+    aniversariantes = []
+    for cliente in clientes:
+        data_nascimento = cliente.get_data_nascimento()
+        if data_nascimento["mes"] == mes:
+            aniversariantes.append(cliente)
+
+    return aniversariantes   
+        

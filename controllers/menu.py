@@ -1,6 +1,6 @@
 import repositorio.clientes as clientes_repositorio
 from entidades.cliente import Cliente
-
+import dotenv
 def iniciar_menu_principal():
     while True: 
         print("1- Consultar clientes\n2- Cadastrar cliente\3- Eviar cupons via email aos clientes aniversariantes\n 4 - Sair")
@@ -16,8 +16,7 @@ def iniciar_menu_principal():
             case '4':
                 break
             case other:
-                print("opção inválida")
-    
+                print("opção inválida")    
 
 
 def iniciar_submenu_consulta_clientes():    
@@ -32,7 +31,7 @@ def iniciar_submenu_consulta_clientes():
                 mostrar_clientes_aniversariantes()               
                 break
             case '3':
-                print("CONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECIFICO")
+                mostrar_clientes_por_mes_aniversario
                 break
             case '4':
                 break
@@ -45,8 +44,18 @@ def mostrar_todos_clientes():
     Cliente.mostrar_clientes(clientes)
     
 def mostrar_clientes_aniversariantes():
-    print("CONSULTAR CLIENTES ANIVERSARIANTES") 
-    anivesariantes = clientes_repositorio.get_clientes_aniversariantes()
+    print("CONSULTAR CLIENTES ANIVERSARIANTES")
+    hoje = datetime.today()
+    dia_atual = hoje.day
+    mes_atual = hoje.month
+ 
+    anivesariantes = clientes_repositorio.get_clientes_por_mes_aniversario(dia=dia_atual, mes=mes_atual)
+    Cliente.mostrar_clientes(anivesariantes)
+
+def mostrar_clientes_por_mes_aniversario():
+    print("CONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECIFICO")
+    mes = int(input("Digite o número do mês (1-12)"))
+    anivesariantes = clientes_repositorio.get_clientes_por_mes_aniversario(mes)
     Cliente.mostrar_clientes(anivesariantes)
    
 
