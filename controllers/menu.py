@@ -44,18 +44,19 @@ def mostrar_todos_clientes():
     Cliente.mostrar_clientes(clientes)
     
 def mostrar_clientes_aniversariantes():
-    print("CONSULTAR CLIENTES ANIVERSARIANTES")
-    hoje = datetime.today()
-    dia_atual = hoje.day
-    mes_atual = hoje.month
- 
-    anivesariantes = clientes_repositorio.get_clientes_por_mes_aniversario(dia=dia_atual, mes=mes_atual)
-    Cliente.mostrar_clientes(anivesariantes)
+    print("\nCONSULTAR CLIENTES ANIVERSARIANTES\n")
+    anivesariantes = clientes_repositorio.get_clientes_aniversariantes()
+    if len(anivesariantes) > 0:
+        Cliente.mostrar_clientes(anivesariantes)
+    else:
+        print("ninguem faz aniversario hoje")
+
 
 def mostrar_clientes_por_mes_aniversario():
-    print("CONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECIFICO")
-    mes = int(input("Digite o número do mês (1-12)"))
+    print("\nCONSULTAR CLIENTES ANIVERSARIANTES DE UM MÊS ESPECIFICO\n")
+    mes = int(input("Digite o número do mês (1-12): \n"))
     anivesariantes = clientes_repositorio.get_clientes_por_mes_aniversario(mes)
-    Cliente.mostrar_clientes(anivesariantes)
-   
-
+    if len(anivesariantes) > 0:
+        Cliente.mostrar_clientes(anivesariantes)
+    else:
+        print("ninguem faz aniversario neste mês")
