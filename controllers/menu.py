@@ -59,4 +59,4 @@ def mostrar_clientes_por_mes_aniversario():
     if len(anivesariantes) > 0:
         Cliente.mostrar_clientes(anivesariantes)
     else:
-        print("ninguem faz aniversario neste mês")
+        print("ninguem faz aniversario neste mês") 

@@ -1,3 +1,5 @@
+from calendar import isleap
+from datetime import datetime
 class Cliente():
     def __init__(self, nome_completo:str, data_nascimento: str, email, data_criacao: str) -> None:
         self.nome_completo = nome_completo
@@ -6,6 +8,9 @@ class Cliente():
         self.data_criacao = data_criacao
         def get__data_nascimento(self) -> dict["dia": str, "mes": str, "ano": str]:
             lista_data = self.data_nascimento.split("/")
+
+            ano_atual = datetime.now().year
+            #if isleap()
             data = {
                 "dia": lista_data[0],
                 "mes": lista_data[1],
