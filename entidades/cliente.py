@@ -1,5 +1,6 @@
 from calendar import isleap
 from datetime import datetime
+import utils.tabela as tabela
 class Cliente():
     def __init__(self, nome_completo:str, data_nascimento: str, email, data_criacao: str) -> None:
         self.nome_completo = nome_completo
@@ -23,12 +24,25 @@ class Cliente():
 
             data = {
                 "dia": int(dia),
-                "mes": int(mes)
-                                
+                "mes": int(mes)                             
             }
             return data
         
         @staticmethod
-        def mostrar_clientes(cliente: list) -> None:
+        def mostrar_clientes(clientes: list) -> None:
+            largura = 30
+            cabecalho = tabela.montar_linha(
+                ["nome completo", "data nascimento", "email", "cliente desde"], eh_cabecalho=True,
+                largura_coluna=largura)
+            
+            print(cabecalho)
+            contador = 0
             for cliente in cliente:
-                print(f"NOME: {cliente.nome_completo}\nDATA NASCIMENTO: {cliente.data_nascimento}\nEMAIL: {cliente.email}\nDATA CRIACAO: {cliente.data_criacao}")      
+                linha = tabela.montar_linha(
+                    ["cliente.nome_completo","cliente.data_nascimento", "cliente.email", "cliente.data_criacao"], 
+                largura_coluna=largura)
+
+                print(linha)
+                contador +=1
+                if contador == len(clientes):
+                    print("-" * len(linha))     
