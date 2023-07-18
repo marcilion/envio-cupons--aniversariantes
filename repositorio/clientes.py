@@ -14,12 +14,12 @@ def get_todos_clientes() -> list:
             if linha_atual == 0:
                linha_atual += 1
             else:
-               lista_valores = linha.split(",")
+               lista_valores = linha.strip().split(",")
                Cliente = Cliente(
-                  nome_completo=lista_valores[0],
-                  data_nascimento=lista_valores[1],
-                  email=lista_valores[2],
-                  data_criacao=lista_valores[3].replace("\n", "")
+                  nome_completo=lista_valores[0].strip(),
+                  data_nascimento=lista_valores[1].strip(),
+                  email=lista_valores[2].sytrip(),
+                  data_criacao=lista_valores[3].strip().replace("\n", "")
                )
                clientes.append(Cliente)
 
@@ -37,7 +37,7 @@ def get_clientes_aniversariantes(mes:int, dia: int) -> list[Cliente]:
 
     aniversariantes = []
     for cliente in clientes:
-        data_nascimento = cliente.get_data_nascimento()
+        data_nascimento = cliente.get_dia_mes_aniversario()
         if data_nascimento["dia"] == dia_atual and data_nascimento["mes"] == mes_atual:
             aniversariantes.append(cliente)
 
@@ -47,7 +47,7 @@ def get_clientes_por_mes_aniversario(mes: int) -> list[Cliente]:
     clientes = get_todos_clientes()    
     aniversariantes = []
     for cliente in clientes:
-        data_nascimento = cliente.get_data_nascimento()
+        data_nascimento = cliente.get_dia_mes_aniversario()
         if data_nascimento["mes"] == mes:
             aniversariantes.append(cliente)
 
