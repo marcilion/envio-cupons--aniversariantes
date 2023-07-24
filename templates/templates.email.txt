@@ -1,0 +1,4 @@
+olá,${nome}.
+nós da ${SERASA} te desejamos um feliz aniversario.
+Aqui está umcupon de desconto para utilizar nas compras de nossos produtos e sercvicos:
+${cuponm}

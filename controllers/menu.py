@@ -1,7 +1,8 @@
 import datetime
 import repositorio.clientes as clientes_repositorio
 from entidades.cliente import Cliente
-import dotenv
+from datetime import datetime
+from servicos.servico_email import email_eh_valido, enviar_emails
 def iniciar_menu_principal():
     while True: 
         print("1- Consultar clientes\n2- Cadastrar cliente\3- Eviar cupons via email aos clientes aniversariantes\n 4 - Sair")
@@ -12,7 +13,7 @@ def iniciar_menu_principal():
             case '2':
                 iniciar_cadastro_cliente()
             case '3':
-                print("ENVIAR CUPONS VIA EMAIL")
+                iniciar_cadastro_cliente()
             case '4':
                 break
             case other:
@@ -82,3 +83,31 @@ def iniciar_cadastro_cliente():
         print("cliente salvo com sucesso")
     else:
         print("cliente não foi salvo")
+
+def iniciar_envio_emails():
+    print("\nENVIAR CUPONS VIA EMAIL\n")
+    aniversariantes = clientes_repositorio.get_clientes_aniversariantes()
+    aniversariantes_com_email_valido = [aniversariantes for aniversariante in aniversariantes if email_eh_valido(aniversariante.email)]
+
+    quantidade = len(aniversariantes)
+
+    if quantidade == 0:
+        print("ninguém com email valido faz anivesário hoje")
+        return 
+
+    escolha = input(f"{quantidade} email(s) para ser(em) envado(s), deseja enviar ou ver os destiantarios")
+    escolha == escolha.upper()
+    if escolha == "VER":
+        Cliente.mostrar_clientes(aniversariantes_com_email_valido)
+    elif escolha == "ENVIAR":
+        destinartarios = [aniversariantes_com_email_valido]
+        for aniversariante in aniversariantes:
+            destinartarios.append(aniversariantes.motar_objeto_email())
+        quantidade_emails_enviados = enviar_emails()
+
+        if quantidade_emails_enviados > 0:
+           print(f"{quantidade_emails_enviados} email(s) enviado(s)")  
+        else: 
+            print("nenhum email enviado")
+    else:
+        print("Escolha inválida") 

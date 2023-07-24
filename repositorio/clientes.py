@@ -2,9 +2,9 @@ from entidades.cliente import Cliente
 import os
 import dotenv
 from datetime import datetime
+from utils.get_env import get_env
 
-dotenv.load_dotenv()
-CAMINHO_ARQUIVO_DADOS = os.getenv("CAMINHO_DADOS_ARQUIVO")
+CAMINHO_ARQUIVO_DADOS = get_env("CAMINHO_DADOS_ARQUIVO")
 
 def get_todos_clientes() -> list:
     clientes = []
